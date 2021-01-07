@@ -2,14 +2,14 @@
 #
 # Copyright 1993-2011 NVIDIA Corporation.  All rights reserved.
 #
-# NVIDIA Corporation and its licensors retain all intellectual property and 
-# proprietary rights in and to this software and related documentation. 
-# Any use, reproduction, disclosure, or distribution of this software 
+# NVIDIA Corporation and its licensors retain all intellectual property and
+# proprietary rights in and to this software and related documentation.
+# Any use, reproduction, disclosure, or distribution of this software
 # and related documentation without an express license agreement from
 # NVIDIA Corporation is strictly prohibited.
 #
-# Please refer to the applicable NVIDIA end user license agreement (EULA) 
-# associated with this source code for terms and conditions that govern 
+# Please refer to the applicable NVIDIA end user license agreement (EULA)
+# associated with this source code for terms and conditions that govern
 # your use of this NVIDIA software.
 #
 ################################################################################
@@ -42,7 +42,7 @@ OSARCH= $(shell uname -m)
 
 # Basic directory setup for SDK
 # (override directories only if they are not already defined)
-SRCDIR     ?= 
+SRCDIR     ?=
 ROOTDIR    ?= ../../../
 ROOTOBJDIR ?= obj
 LIBDIR     := $(ROOTDIR)/shared/lib/
@@ -154,8 +154,8 @@ ifeq ($(dbg),1)
 	COMMONFLAGS += -g
 	BINSUBDIR   := debug
 	LIBSUFFIX   := D
-else 
-	COMMONFLAGS += -O3 
+else
+	COMMONFLAGS += -O3
 	BINSUBDIR   := release
 	LIBSUFFIX   :=
 	CXXFLAGS    += -fno-strict-aliasing
@@ -173,7 +173,7 @@ ifeq ($(USEGLLIB),1)
 		ifeq "$(strip $(HP_64))" ""
 			OPENGLLIB += -lGLEW -L/usr/X11R6/lib
 		else
-			OPENGLLIB += -lGLEW_x86_64 -L/usr/X11R6/lib64
+			OPENGLLIB += -lGLEW -L/usr/X11R6/lib64
 		endif
 	endif
 
@@ -191,11 +191,11 @@ endif
 
 # Libs
 ifneq ($(DARWIN),)
-   LIB       := -L${OCLLIBDIR} -L$(LIBDIR) -L$(SHAREDDIR)/lib/$(OSLOWER) 
-   LIB += -framework OpenCL -framework OpenGL ${OPENGLLIB} -framework AppKit ${ATF} ${LIB} 
+   LIB       := -L${OCLLIBDIR} -L$(LIBDIR) -L$(SHAREDDIR)/lib/$(OSLOWER)
+   LIB += -framework OpenCL -framework OpenGL ${OPENGLLIB} -framework AppKit ${ATF} ${LIB}
 else
-   LIB       := ${USRLIBDIR} -L${OCLLIBDIR} -L$(LIBDIR) -L$(SHAREDDIR)/lib/$(OSLOWER) 
-   LIB += -lOpenCL ${OPENGLLIB} ${LIB} 
+   LIB       := ${USRLIBDIR} -L${OCLLIBDIR} -L$(LIBDIR) -L$(SHAREDDIR)/lib/$(OSLOWER)
+   LIB += -lOpenCL ${OPENGLLIB} ${LIB}
 endif
 
 
@@ -203,7 +203,7 @@ endif
 ifneq ($(STATIC_LIB),)
 	TARGETDIR := $(OCLLIBDIR)
 	TARGET   := $(subst .a,_$(LIB_ARCH)$(LIBSUFFIX).a,$(OCLLIBDIR)/$(STATIC_LIB))
-	LINKLINE  = ar qv $(TARGET) $(OBJS) 
+	LINKLINE  = ar qv $(TARGET) $(OBJS)
 else
 	LIB += -loclUtil_$(LIB_ARCH)$(LIBSUFFIX) -lshrutil_$(LIB_ARCH)$(LIBSUFFIX)
 	TARGETDIR := $(BINDIR)/$(BINSUBDIR)
@@ -211,7 +211,7 @@ else
 	LINKLINE  = $(LINK) -o $(TARGET) $(OBJS) $(LIB)
 endif
 
-# check if verbose 
+# check if verbose
 ifeq ($(verbose), 1)
 	VERBOSE :=
 else
